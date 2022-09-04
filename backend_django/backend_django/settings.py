@@ -40,6 +40,7 @@ INSTALLED_APPS = [
 
     'user.apps.UserConfig',
     'chuck_norris_jokes.apps.ChuckNorrisJokesConfig',
+    'favorite_jokes.apps.FavoriteJokesConfig',
 ]
 
 MIDDLEWARE = [
