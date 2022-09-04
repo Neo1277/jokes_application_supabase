@@ -2,6 +2,9 @@ from supabase import create_client, Client
 
 from decouple import config
 
+from pprint import pprint
+
+
 class SupabaseClient(object):
 
     #supabase_url = config('SUPABASE_URL')
@@ -25,17 +28,53 @@ class AuthUser(SupabaseClient):
         user = supabase.auth.sign_up(email=email, password=password)
         return user
 
-    def get_user(self, jwt_token):
+    # authenticate user
+    async def sign_in(self, email, password):
         supabase = self.get_supabase_client()
-        user = supabase.auth.api.getUser(jwt_token)
-
+        user = await supabase.auth.sign_in(email=email, password=password)
         return user
 
-authuser = AuthUser()
-#authuser_sign_in = authuser.sign_up('admin@gmail.com', '123456789')
-authuser_get_user = authuser.get_user('zcxzdqw41432423sfXSFDfsfd')
-print(authuser_get_user)
+    async def get_user(self, jwt_token):
+        supabase = self.get_supabase_client()
+        #user = supabase.auth.api.getUser(jwt_token)
+        #user = supabase.auth.session()
+        error, result = await supabase.auth.api.get_user(jwt=jwt_token)
+        if result:
+            print(True)
+        else:
+            print(False)
 
+        #pprint(inspect.getargspec(supabase.auth.api.get_user))
+        return user
+
+class Categories(SupabaseClient):
+    # register category
+    def create(self, description):
+        supabase = self.get_supabase_client()
+        data = supabase.table("categories").insert({"description": description}).execute()
+        return data
+
+    def get_user_jokes(self, user_id):
+        supabase = self.get_supabase_client()
+        data = (
+            supabase.table("categories")
+                .select("*")
+                .eq('user_id', user_id)
+                .execute()
+        )
+        return data
+
+authuser = AuthUser()
+#authuser_sign_in = await authuser.sign_in('admin1@gmail.com', '123456789')
+#import asyncio
+#authuser_get_user =  authuser.get_user(config('JWT_SECRET'))
+#print(authuser_get_user)
+
+
+category = Categories()
+category_save = category.create('Test1')
+categories_joke = category.get_user_jokes('81f84361-5e10-4c30-a318-cc1c56c22ef1')
+pprint(categories_joke)
 
 
 """
