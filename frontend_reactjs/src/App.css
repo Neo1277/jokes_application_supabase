@@ -37,3 +37,20 @@
   padding-top: 7px;
   padding-left: 40px;
 }
+
+.postCard{
+  padding-bottom: 30px;
+}
+
+.class-col {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  height: 100%;
+}
+
+.main-container {
+  display: flex;
+  padding-bottom: 70px;;
+}

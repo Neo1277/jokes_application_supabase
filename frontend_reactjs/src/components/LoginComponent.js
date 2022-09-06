@@ -11,46 +11,31 @@ import {
     Label,
 } from 'reactstrap';
 
+import { supabase } from '../shared/supabaseClient';
 
 export class LoginComponent extends Component {
 
     constructor(props){
         super(props);
-        /*
-        this.handleRegister = this.handleRegister.bind(this);
-        this.handleFirstName = this.handleFirstName.bind(this);
-        this.handleLastName = this.handleLastName.bind(this);
-        this.handleCountryCode = this.handleCountryCode.bind(this);
-        this.validateEmailAndCahngeState = this.validateEmailAndCahngeState.bind(this);
-        //this.handleValidacionEmail = this.handleValidacionEmail.bind(this);
-
-	    this.state = {
-            first_name: '',
-            last_name: '',
-            email: '',
-            country_code: 'AF'
-	    };
-        */
+        this.handleLogin = this.handleLogin.bind(this);
+        
 
     }
-
+    //Call loginUser functions
+    async handleLogin(event) {
+        event.preventDefault();
+        //this.props.signInWithEmail();
+        const { user, error } = await supabase.auth.signInWithPassword({
+            email: this.email.value,
+            password: this.password.value,
+        })
+        
+    }
     /**
      * Render form with their respective validations
      */
     render(){
-        /*
-        if (this.props.countries.isLoading) {
-		
-            return(
-                <Loading />
-            );
-        }
-        else if (this.props.countries.errMess) {
-            return(
-                <h4>{this.props.errMess}</h4>
-            );
-        }
-        else { */
+        
             return(
                 <div className="container">
                     
@@ -70,7 +55,7 @@ export class LoginComponent extends Component {
                         </div>
                         <div className="col-12 col-md-4">
 
-                            <Form>
+                            <Form onSubmit={this.handleLogin}>
                                 <FormGroup>
                                     <Label htmlFor="email">Email</Label>
                                     <Input type="email" id="email" name="email"

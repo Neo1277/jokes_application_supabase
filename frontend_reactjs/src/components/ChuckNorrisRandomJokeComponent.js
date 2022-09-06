@@ -12,7 +12,75 @@ import {
     CardBody,
     CardTitle, 
     CardSubtitle, 
+	Form, 
+	Input, 
 } from 'reactstrap';
+
+
+export class RegisterFavoriteChuckNorrisJokeCOmponent extends Component {
+
+    constructor(props){
+        super(props);
+        this.handleRegister = this.handleRegister.bind(this);
+        
+    }
+    //Call loginUser functions
+    async handleRegister(event) {
+        event.preventDefault();
+        this.props.registerFavoriteJoke({
+            icon_url: this.icon_url.value, 
+            joke_id: this.joke_id.value, 
+            url: this.url.value, 
+            value: this.value.value
+        });
+
+    }
+    /**
+     * Render form with their respective validations
+     */
+    render(){
+        /*
+        if (this.props.countries.isLoading) {
+		
+            return(
+                <Loading />
+            );
+        }
+        else if (this.props.countries.errMess) {
+            return(
+                <h4>{this.props.errMess}</h4>
+            );
+        }
+        else { */
+            return(
+                <Form onSubmit={this.handleRegister}>
+                    <Input type="hidden" id="icon_url" name="icon_url"
+                        innerRef={(input) => this.icon_url = input}
+                        maxLength={300}
+                        defaultValue={this.props.chuck_norris_random_joke.icon_url} />
+                    <Input type="hidden" id="joke_id" name="joke_id"
+                        innerRef={(input) => this.joke_id = input}
+                        maxLength={300}
+                        defaultValue={this.props.chuck_norris_random_joke.id} />
+                    <Input type="hidden" id="url" name="url"
+                        innerRef={(input) => this.url = input}
+                        maxLength={300}
+                        defaultValue={this.props.chuck_norris_random_joke.url} />
+                    <Input type="hidden" id="value" name="value"
+                        innerRef={(input) => this.value = input}
+                        maxLength={300}
+                        defaultValue={this.props.chuck_norris_random_joke.value} />                                                
+                    <Button type="submit" value="submit" color="primary">
+                        {/*<span className="fa fa-plus-square">&nbsp;</span>  */}
+                        Mark as favorite
+                    </Button>
+                </Form>
+            );
+        //}
+    }
+
+}
+
 
 /**
  * Show status if the page is Loading shows spinner else shows error or the page content
@@ -67,7 +135,11 @@ import {
                             <CardText>{props.chuck_norris_random_joke.chuck_norris_random_joke.value}</CardText>
                             <CardText>{props.chuck_norris_random_joke.chuck_norris_random_joke.url}</CardText>
                             <CardText>{props.chuck_norris_random_joke.chuck_norris_random_joke.icon_url}</CardText>
-                            <Button>Mark as favorite Joke</Button>
+                            <RegisterFavoriteChuckNorrisJokeCOmponent 
+                                        chuck_norris_random_joke={props.chuck_norris_random_joke.chuck_norris_random_joke} 
+                                        registerFavoriteJoke={props.registerFavoriteJoke}
+                            />
+
                         </CardBody>
                     </Card>
 				</div>

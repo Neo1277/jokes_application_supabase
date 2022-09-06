@@ -35,6 +35,14 @@ import {
 		/**
 		 * Iterate over object that is in the store
 		 */
+        let count = -1;
+        const colorsCard = [
+            "primary",
+            "success",
+            "info",
+            "warning",
+            "danger",
+        ];
 		return(
 			<div className="container">
 				<br />
@@ -60,14 +68,19 @@ import {
                 </Link>				*/}
             
 
-
-                    {props.favorite_jokes.favorite_jokes.map((field, i) => { 
-                            return(
+                        <div className="row row-content">
                             
+                    {props.favorite_jokes.favorite_jokes.map((field, i) => { 
+                        
+                            
+                            if(count==4){
+                                count = -1;
+                            }
+                            count += 1;
+                            return(
                                 <div key={field._id} className="col-12 col-md-4 m-20 postCard">
                                     
-                                    <Card>
-                                        <CardImg top width="100%" src={field.icon_url} alt="Card image cap" />
+                                    <Card body inverse color={colorsCard[count]}>
                                         <CardBody>
                                             <CardTitle>Favorite joke</CardTitle>
                                             <CardSubtitle>Random joke</CardSubtitle>
@@ -85,7 +98,7 @@ import {
                         }) 
 					}
 
-
+                        </div>
 
 
 			</div>

@@ -7,7 +7,8 @@ import { connect } from 'react-redux';
 import { 
   fetchChuckNorrisRandomJoke, 
   fetchFavoriteJokes,
-  registerFavoriteJoke
+  registerFavoriteJoke,
+  signInWithEmail
 } from '../redux/ActionCreators';
 
 import { 
@@ -40,6 +41,8 @@ const mapDispatchToProps = (dispatch) => ({
   fetchChuckNorrisRandomJoke: () => { dispatch(fetchChuckNorrisRandomJoke())},
   fetchFavoriteJokes: () => dispatch(fetchFavoriteJokes()),
   registerFavoriteJoke: (favorite_joke_data) => dispatch(registerFavoriteJoke(favorite_joke_data)),
+
+  signInWithEmail: () => dispatch(signInWithEmail()),
 
 });
 
@@ -86,7 +89,7 @@ class Main extends Component {
       <div>
         <Header />
           <Switch>
-            <Route path='/login' component={() => <LoginComponent />} />
+            <Route path='/login' component={() => <LoginComponent signInWithEmail={this.props.signInWithEmail} />} />
             <Route path='/home' component={() => <HomeComponent />} />
             {/*<Route path='/home' component={() => <EmployeesView employees={this.props.employees} fetchEmployees={this.props.fetchEmployees} />} />
             <Route path='/add_employee' component={() => <AddEmployeeComponent registerEmployee={this.props.registerEmployee} 
@@ -94,9 +97,10 @@ class Main extends Component {
                                                                 types_of_identity_documents={this.props.types_of_identity_documents}
     retrieveNewEmail={this.props.retrieveNewEmail} /> } />*/}
             
-            <Route path="/chuck_norris_random_joke" component={() => <ChuckNorrisRandomJokeComponent chuck_norris_random_joke={this.props.chuck_norris_random_joke} /> } />
+            <Route path="/chuck_norris_random_joke" component={() => <ChuckNorrisRandomJokeComponent chuck_norris_random_joke={this.props.chuck_norris_random_joke} 
+                                                                        registerFavoriteJoke={this.props.registerFavoriteJoke} /> } />
             <Route path="/my_jokes" component={() => <MyJokesComponent favorite_jokes={this.props.favorite_jokes} /> } />
-            <Redirect to="/login" />
+            <Redirect to="/home" />
           </Switch>
         <Footer />
       </div>

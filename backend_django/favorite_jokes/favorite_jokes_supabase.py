@@ -7,12 +7,12 @@ class FavoriteJokes(SupabaseClient):
         data = supabase.table("my_jokes").insert(data).execute()
         return data
 
-    def get_user_favorite_jokes(self, user_id):
+    def get_user_favorite_jokes(self):
         supabase = self.get_supabase_client()
         data = (
             supabase.table("my_jokes")
                 .select("*")
-                .eq('user_id', user_id)
+                #.eq('user_id', user_id)
                 .execute()
         )
         return data

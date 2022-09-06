@@ -6,6 +6,8 @@ import {
   retrieve_user_favorite_jokes
 } from '../shared/baseUrl';
 
+import { supabase } from '../shared/supabaseClient';
+
 /* Request to Laravel API and show error or proceed to dispatch the data  */
 export const fetchChuckNorrisRandomJoke = () => (dispatch) => {
 
@@ -54,9 +56,7 @@ export const fetchFavoriteJokes = () => (dispatch) => {
 
   dispatch(favoriteJokesLoading(true));
 
-  var user_id = '2aed82f4-f705-4ccc-878e-318bc47e620f';
-
-  return fetch(baseUrlApiRest + retrieve_user_favorite_jokes + '/' + user_id, {
+  return fetch(baseUrlApiRest + retrieve_user_favorite_jokes, {
     method: "GET",
     headers: {
       "Content-Type": "application/json"
@@ -95,10 +95,10 @@ export const addFavoriteJokes = (favorite_jokes) => ({
 });
 
 /**
- * Register Employee
+ * Register Favorite joke
  */
  export const registerFavoriteJoke = (favorite_joke_data) => (dispatch) => {
-   
+
   return fetch(baseUrlApiRest +  save_favorite_joke, {
       method: "POST",
       body: JSON.stringify(favorite_joke_data),
@@ -124,7 +124,7 @@ export const addFavoriteJokes = (favorite_jokes) => ({
     console.log('Register favorite joke', response); 
     alert('Favorite joke registered successfully!\n'); 
     /*window.location.reload(false);*/
-    //window.location.href = '/home'; 
+    window.location.href = '/home'; 
   })
   /*.catch(error =>  { 
     console.log('Favorite joke', error.message); 
@@ -132,3 +132,18 @@ export const addFavoriteJokes = (favorite_jokes) => ({
   });*/
   .catch(error => dispatch(favoriteJokesFailed(error.message)));
 };
+
+/**
+ * Login
+ */
+ export async function signInWithEmail(email, password) {
+  const { user, error } = await supabase.auth.signInWithPassword({
+    email: email,
+    password: password,
+  })
+  console.log(user);
+}
+
+export async function signOut() {
+  const { error } = await supabase.auth.signOut()
+}

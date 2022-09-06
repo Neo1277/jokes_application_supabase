@@ -14,23 +14,7 @@ import {
  * Show status if the page is Loading shows spinner else shows error or the page content
  */
  export const HomeComponent = (props) => {
-	console.log(props);
-	/*
-	if (props.employees.isLoading) {
-		
-        return(
-            <Loading />
-        );
-    }
-    else if (props.employees.errMess) {
-        return(
-            <h4>{props.employees.errMess}</h4>
-        );
-    }
-	else { */
-		/**
-		 * Iterate over object that is in the store
-		 */
+	 
 		return(
 			<div className="container">
 				<br />
@@ -47,19 +31,24 @@ import {
                  * Font awesome icons:
                  * https://fontawesome.com/v4/icons/
                  */}
-				<Link to='/chuck_norris_random_joke' >
-					<Button color="primary">
-                        {/*<span className="fa fa-plus-square">&nbsp;</span>*/}
-                           Chuck Norris Random Joke
-                    </Button>
-                </Link>				
-				<Link to='/my_jokes' >
-					<Button color="primary">
-                        {/*<span className="fa fa-plus-square">&nbsp;</span>*/}
-                           My Jokes
-                    </Button>
-                </Link>				
-
+				<div className="row main-container">
+					<div className="class-col">
+						<Link to='/chuck_norris_random_joke' >
+							<Button color="primary" size="lg" active>
+								{/*<span className="fa fa-plus-square">&nbsp;</span>*/}
+								Chuck Norris Random Joke
+							</Button>
+						</Link>
+					</div>
+					<div className="class-col">
+						<Link to='/my_jokes' >
+							<Button color="danger" size="lg" active>
+								{/*<span className="fa fa-plus-square">&nbsp;</span>*/}
+								My Jokes
+							</Button>
+						</Link>
+					</div>
+				</div>
 			</div>
         );
 	//}

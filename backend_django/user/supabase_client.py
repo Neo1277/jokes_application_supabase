@@ -43,3 +43,14 @@ class AuthUser(SupabaseClient):
 
         #pprint(inspect.getargspec(supabase.auth.api.get_user))
         return user
+
+"""
+Create user
+random_email: str = "user1@supamail.com"
+random_password: str = "1234567"
+user_auth = AuthUser()
+user = user_auth.sign_up(email=random_email, password=random_password)
+
+from pprint import pprint
+pprint(user)
+"""
