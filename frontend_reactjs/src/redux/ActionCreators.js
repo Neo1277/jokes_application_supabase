@@ -56,7 +56,9 @@ export const fetchFavoriteJokes = () => (dispatch) => {
 
   dispatch(favoriteJokesLoading(true));
 
-  return fetch(baseUrlApiRest + retrieve_user_favorite_jokes, {
+  const user_id = '' + localStorage.getItem('user_id');
+
+  return fetch(baseUrlApiRest + retrieve_user_favorite_jokes + '/' + user_id, {
     method: "GET",
     headers: {
       "Content-Type": "application/json"
@@ -144,6 +146,18 @@ export const addFavoriteJokes = (favorite_jokes) => ({
   console.log(user);
 }
 
+export async function getSession() {
+  const { data } = await supabase.auth.getSession()
+  console.log(data.session.access_token)
+  localStorage.setItem('user_id', data.session.user.id);
+  localStorage.setItem('access_token', data.session.access_token);
+  return data;
+}
+
 export async function signOut() {
-  const { error } = await supabase.auth.signOut()
+  const { error } = await supabase.auth.signOut();
+  localStorage.removeItem('user_id');
+  localStorage.removeItem('access_token');
+  window.location.href = '/home'; 
+  return error;
 }

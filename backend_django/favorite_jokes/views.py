@@ -12,7 +12,7 @@ class SaveFavoriteJokeView(APIView):
 
 class RetrieveUserFavoriteJokesView(APIView):
 
-    def get(self, request):
+    def get(self, request, user_id):
         favorite_jokes = FavoriteJokes()
-        user_favorite_jokes = favorite_jokes.get_user_favorite_jokes()
+        user_favorite_jokes = favorite_jokes.get_user_favorite_jokes(user_id)
         return Response(user_favorite_jokes.data)

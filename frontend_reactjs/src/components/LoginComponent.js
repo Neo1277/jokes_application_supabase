@@ -12,6 +12,7 @@ import {
 } from 'reactstrap';
 
 import { supabase } from '../shared/supabaseClient';
+import { getSession } from '../redux/ActionCreators';
 
 export class LoginComponent extends Component {
 
@@ -25,11 +26,24 @@ export class LoginComponent extends Component {
     async handleLogin(event) {
         event.preventDefault();
         //this.props.signInWithEmail();
-        const { user, error } = await supabase.auth.signInWithPassword({
+
+        const { data } = await supabase.auth.signInWithPassword({
             email: this.email.value,
             password: this.password.value,
-        })
-        
+          })
+        if(data.session != null){
+            console.log(data);
+            getSession();
+            window.location.href = '/home'; 
+        }
+        /*
+          console.log("Logged in user");
+          const { data } = await supabase.auth.getSession()
+          console.log(data);
+
+          const { error } = await supabase.auth.signOut()
+
+        */
     }
     /**
      * Render form with their respective validations

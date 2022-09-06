@@ -56,28 +56,6 @@ class Main extends Component {
   }
 
   render(){
-    
-    {/*}
-    const EmployeeWithId = ({match}) => {
-      return(
-        <EditEmployeeComponent employee={this.props.employees.employees.results.filter((employee) => employee.third_party_id === match.params.id)[0]} 
-                              editEmployee={this.props.editEmployee} 
-                              countries={this.props.countries} areas={this.props.areas} 
-                              types_of_identity_documents={this.props.types_of_identity_documents}
-                              retrieveNewEmail={this.props.retrieveNewEmail} 
-        />
-      );
-    };
-
-    const DeleteEmployeeWithId = ({match}) => {
-      return(
-        <DeleteEmployeeComponent employee={this.props.employees.employees.results.filter((employee) => employee.third_party_id === match.params.id)[0]} 
-                              deleteEmployee={this.props.deleteEmployee} 
-                              countries={this.props.countries} areas={this.props.areas} 
-                              types_of_identity_documents={this.props.types_of_identity_documents}
-        />
-      );
-    };*/}
 
     /**
      * Set routes to open the different pages calling the components
@@ -91,11 +69,6 @@ class Main extends Component {
           <Switch>
             <Route path='/login' component={() => <LoginComponent signInWithEmail={this.props.signInWithEmail} />} />
             <Route path='/home' component={() => <HomeComponent />} />
-            {/*<Route path='/home' component={() => <EmployeesView employees={this.props.employees} fetchEmployees={this.props.fetchEmployees} />} />
-            <Route path='/add_employee' component={() => <AddEmployeeComponent registerEmployee={this.props.registerEmployee} 
-                                                                countries={this.props.countries} areas={this.props.areas} 
-                                                                types_of_identity_documents={this.props.types_of_identity_documents}
-    retrieveNewEmail={this.props.retrieveNewEmail} /> } />*/}
             
             <Route path="/chuck_norris_random_joke" component={() => <ChuckNorrisRandomJokeComponent chuck_norris_random_joke={this.props.chuck_norris_random_joke} 
                                                                         registerFavoriteJoke={this.props.registerFavoriteJoke} /> } />

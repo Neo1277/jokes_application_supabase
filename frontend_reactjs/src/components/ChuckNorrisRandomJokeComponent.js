@@ -5,9 +5,7 @@ import {
 	Breadcrumb, 
 	BreadcrumbItem,
 	Button,
-	Table,
     Card, 
-    CardImg, 
     CardText, 
     CardBody,
     CardTitle, 
@@ -16,6 +14,7 @@ import {
 	Input, 
 } from 'reactstrap';
 
+import { getSession } from '../redux/ActionCreators';
 
 export class RegisterFavoriteChuckNorrisJokeCOmponent extends Component {
 
@@ -25,13 +24,16 @@ export class RegisterFavoriteChuckNorrisJokeCOmponent extends Component {
         
     }
     //Call loginUser functions
-    async handleRegister(event) {
+    handleRegister(event) {
+		const user_id = localStorage.getItem('user_id');
+        //console.log(session)
         event.preventDefault();
         this.props.registerFavoriteJoke({
             icon_url: this.icon_url.value, 
             joke_id: this.joke_id.value, 
             url: this.url.value, 
-            value: this.value.value
+            value: this.value.value, 
+            user_id: user_id
         });
 
     }
@@ -39,19 +41,7 @@ export class RegisterFavoriteChuckNorrisJokeCOmponent extends Component {
      * Render form with their respective validations
      */
     render(){
-        /*
-        if (this.props.countries.isLoading) {
-		
-            return(
-                <Loading />
-            );
-        }
-        else if (this.props.countries.errMess) {
-            return(
-                <h4>{this.props.errMess}</h4>
-            );
-        }
-        else { */
+        
             return(
                 <Form onSubmit={this.handleRegister}>
                     <Input type="hidden" id="icon_url" name="icon_url"
@@ -110,7 +100,7 @@ export class RegisterFavoriteChuckNorrisJokeCOmponent extends Component {
 					<div className="col">
 						<Breadcrumb>
 							<BreadcrumbItem><Link to='/home'>Home</Link></BreadcrumbItem>
-							<BreadcrumbItem active>Chuck Norris random joke</BreadcrumbItem>
+							<BreadcrumbItem active>Get Jokes</BreadcrumbItem>
 						</Breadcrumb>
 					</div>
 				</div>				
@@ -119,14 +109,7 @@ export class RegisterFavoriteChuckNorrisJokeCOmponent extends Component {
                  * Font awesome icons:
                  * https://fontawesome.com/v4/icons/
                  */}
-                 {/*}
-				<Link to='/add_employee' >
-					<Button color="primary">
-                        <span className="fa fa-plus-square">&nbsp;</span>  
-                           Add employee
-                    </Button>
-                </Link>				*/}
-
+                 
 				<div className="row row-content">
                     <Card>
                         <CardBody>

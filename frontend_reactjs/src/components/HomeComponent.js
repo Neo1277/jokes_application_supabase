@@ -36,7 +36,7 @@ import {
 						<Link to='/chuck_norris_random_joke' >
 							<Button color="primary" size="lg" active>
 								{/*<span className="fa fa-plus-square">&nbsp;</span>*/}
-								Chuck Norris Random Joke
+								Get Jokes
 							</Button>
 						</Link>
 					</div>

@@ -1,13 +1,10 @@
-import React, { Component }  from 'react';
+import React  from 'react';
 import { Link } from "react-router-dom";
 import { Loading } from './LoadingComponent';
 import { 
 	Breadcrumb, 
 	BreadcrumbItem,
-	Button,
-	Table,
     Card, 
-    CardImg, 
     CardText, 
     CardBody,
     CardTitle, 
@@ -33,7 +30,7 @@ import {
     }
 	else { 
 		/**
-		 * Iterate over object that is in the store
+		 * Array to set colors to Card items with count variable inside map
 		 */
         let count = -1;
         const colorsCard = [
@@ -59,15 +56,6 @@ import {
                  * Font awesome icons:
                  * https://fontawesome.com/v4/icons/
                  */}
-                 {/*}
-				<Link to='/add_employee' >
-					<Button color="primary">
-                        <span className="fa fa-plus-square">&nbsp;</span>  
-                           Add employee
-                    </Button>
-                </Link>				*/}
-            
-
                         <div className="row row-content">
                             
                     {props.favorite_jokes.favorite_jokes.map((field, i) => { 
@@ -78,7 +66,7 @@ import {
                             }
                             count += 1;
                             return(
-                                <div key={field._id} className="col-12 col-md-4 m-20 postCard">
+                                <div key={field.id} className="col-12 col-md-4 m-20 postCard">
                                     
                                     <Card body inverse color={colorsCard[count]}>
                                         <CardBody>
@@ -88,9 +76,7 @@ import {
                                             <CardText>{field.value}</CardText>
                                         </CardBody>
                                     </Card>
-                                    {/*<RatePostWithStars totalStars={5} />*/}
-                                    {/*<StarRating totalStars={5} starsSelected={3} />*/}
-                            
+
                                 </div>		
                                                                 
                             );
