@@ -37,6 +37,11 @@ SUPABASE_KEY=your-supabase-key
 JWT_SECRET=your-jwt-secret
 SERVICE_ROLE=your-service-role
 ``` 
+*   Igualmente tambien se debe crear un archivo .env en el directorio /frontend_reactjs con las siguientes variables:
+```
+REACT_APP_SUPABASE_URL=yoursupabase-url
+REACT_APP_SUPABASE_ANON_KEY=your-api-key
+``` 
 *   Crear un ambiente virtual para las dependencias [Link official documentation](https://docs.djangoproject.com/en/3.1/intro/contributing/#getting-a-copy-of-django-s-development-version "djangoenviroment")
 *   Activar el ambiente virtual e ir a la carpeta /backend_django e instalar las dependencias con el siguiente comando usando el archivo requirements.txt que tiene las dependencias
 ```
