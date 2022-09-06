@@ -63,16 +63,58 @@ class Main extends Component {
      * does not match with any url from here
      */
 
+     const user_id = localStorage.getItem('user_id');
+
+     const PrivateRouteMainMenu = ({ component: Component, ...rest }) => (
+      <Route {...rest} render={(props) => (
+        user_id != null
+          ? <Component {...props} />
+          : <Redirect to={{
+              pathname: '/login',
+              state: { from: props.location }
+            }} />
+      )} />
+    );
+
+    const PrivateRouteMainChuckNorrisRandomJoke = ({ component: Component, ...rest }) => (
+     <Route {...rest} render={(props) => (
+       user_id != null
+         ? <Component {...props} />
+         : <Redirect to={{
+             pathname: '/login',
+             state: { from: props.location }
+           }} />
+     )} />
+   );
+
+   const PrivateRouteFavoriteJokes = ({ component: Component, ...rest }) => (
+    <Route {...rest} render={(props) => (
+      user_id != null
+        ? <Component {...props} />
+        : <Redirect to={{
+            pathname: '/login',
+            state: { from: props.location }
+          }} />
+    )} />
+  );
+
     return (
       <div>
         <Header />
           <Switch>
             <Route path='/login' component={() => <LoginComponent signInWithEmail={this.props.signInWithEmail} />} />
-            <Route path='/home' component={() => <HomeComponent />} />
             
-            <Route path="/chuck_norris_random_joke" component={() => <ChuckNorrisRandomJokeComponent chuck_norris_random_joke={this.props.chuck_norris_random_joke} 
-                                                                        registerFavoriteJoke={this.props.registerFavoriteJoke} /> } />
-            <Route path="/my_jokes" component={() => <MyJokesComponent favorite_jokes={this.props.favorite_jokes} /> } />
+            <PrivateRouteMainMenu exact path="/home" component={() => <HomeComponent />} />
+            {/*<Route path='/home' component={() => <HomeComponent />} />*/}
+            
+            
+            <PrivateRouteMainChuckNorrisRandomJoke exact path="/chuck_norris_random_joke" component={() => <ChuckNorrisRandomJokeComponent chuck_norris_random_joke={this.props.chuck_norris_random_joke} 
+                                                                        registerFavoriteJoke={this.props.registerFavoriteJoke} />} />
+            {/*<Route path="/chuck_norris_random_joke" component={() => <ChuckNorrisRandomJokeComponent chuck_norris_random_joke={this.props.chuck_norris_random_joke} 
+                                                                        registerFavoriteJoke={this.props.registerFavoriteJoke} /> } />*/}
+            
+            <PrivateRouteFavoriteJokes exact path="/my_jokes" component={() => <MyJokesComponent favorite_jokes={this.props.favorite_jokes} />} />                                                
+            {/*<Route path="/my_jokes" component={() => <MyJokesComponent favorite_jokes={this.props.favorite_jokes} /> } />*/}
             <Redirect to="/home" />
           </Switch>
         <Footer />

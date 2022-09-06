@@ -35,6 +35,8 @@ export class LoginComponent extends Component {
             console.log(data);
             getSession();
             window.location.href = '/home'; 
+        }else{
+            alert('Wrong credentials');
         }
         /*
           console.log("Logged in user");
