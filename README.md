@@ -49,7 +49,7 @@ pip install -r requirements.txt
 ``` 
 *   Para instalar la aplicación ReacJS ir a la carpeta /frontend_reactjs y ejecutar:
 ```
-yarn install
+npm install
 ```
 
 ## Como ejecutar ##
@@ -59,5 +59,5 @@ python manage.py runserver
 ```
 *   También ir a la carpeta frontend_reactjs y ejecutar:
 ```
-yarn start
+npm start
 ```
